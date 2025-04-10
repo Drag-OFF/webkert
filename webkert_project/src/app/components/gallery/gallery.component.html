@@ -1,1 +1,8 @@
-<p>gallery works!</p>
+<div class="gallery">
+  <div *ngFor="let tattoo of tattoos" class="tattoo-card">
+    <h3>{{ tattoo.name }}</h3>
+    <p>{{ tattoo.description }}</p>
+    <p>Price: {{ tattoo.price | currency }}</p>
+    <p>Duration: {{ tattoo.duration }} minutes</p>
+  </div>
+</div>

@@ -1,1 +1,18 @@
-<p>booking works!</p>
+<form [formGroup]="bookingForm" (ngSubmit)="onSubmit()">
+  <mat-form-field appearance="fill">
+    <mat-label>Customer Name</mat-label>
+    <input matInput formControlName="customerName" required>
+  </mat-form-field>
+
+  <mat-form-field appearance="fill">
+    <mat-label>Tattoo ID</mat-label>
+    <input matInput type="number" formControlName="tattooId" required>
+  </mat-form-field>
+
+  <mat-form-field appearance="fill">
+    <mat-label>Date</mat-label>
+    <input matInput type="date" formControlName="date" required>
+  </mat-form-field>
+
+  <button mat-raised-button color="primary" type="submit" [disabled]="!bookingForm.valid">Book Appointment</button>
+</form>
