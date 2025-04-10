@@ -1,0 +1,14 @@
+ul {
+  list-style: none;
+  display: flex;
+  gap: 1rem;
+}
+
+li a {
+  text-decoration: none;
+  color: white;
+}
+
+li a:hover {
+  text-decoration: underline;
+}
