@@ -1,0 +1,7 @@
+<div *ngIf="booking" class="booking-summary">
+  <h3>Booking Summary</h3>
+  <p>Name: {{ booking.name }}</p>
+  <p>Date: {{ booking.date }}</p>
+  <p>Time: {{ booking.time }}</p>
+  <button mat-raised-button color="warn" (click)="onCancel()">Cancel Booking</button>
+</div>

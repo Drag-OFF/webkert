@@ -1,0 +1,5 @@
+<div *ngIf="artist" class="artist-detail">
+  <h3>{{ artist.name }}</h3>
+  <p>Specialty: {{ artist.specialty }}</p>
+  <button (click)="selectArtist()">Select Artist</button>
+</div>

@@ -1,0 +1,12 @@
+<nav>
+  <a routerLink="/" routerLinkActive="active" [ngClass]="{ 'highlight': isHighlighted }">Home</a>
+  <a routerLink="/booking" routerLinkActive="active">Booking</a>
+  <a routerLink="/artists" routerLinkActive="active">Artists</a>
+  <a routerLink="/contact" routerLinkActive="active">Contact</a>
+</nav>
+
+<mat-toolbar color="primary">
+  <span>My Tattoo Booking App</span>
+</mat-toolbar>
+
+<router-outlet></router-outlet>
