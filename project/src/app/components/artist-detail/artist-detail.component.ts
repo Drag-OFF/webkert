@@ -1,20 +1,25 @@
-import { CommonModule, NgIf } from '@angular/common';
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, Input, Output, EventEmitter } from '@angular/core';
+import { TattooArtist } from '../../models/TattooArtist';
+import { ArtistNameUpperPipe } from '../../pipes/artist-name-upper.pipe';
+import { SpecialtyListPipe } from '../../pipes/specialty-list.pipe';
+import { CommonModule } from '@angular/common';
+import { MatButtonModule } from '@angular/material/button';
+import { MatCardModule } from '@angular/material/card';
+import { MatIconModule } from '@angular/material/icon';
+
 
 @Component({
   selector: 'app-artist-detail',
   standalone: true,
-  imports: [NgIf, CommonModule],
+  imports: [CommonModule, MatCardModule, MatButtonModule, MatIconModule, ArtistNameUpperPipe, SpecialtyListPipe],
   templateUrl: './artist-detail.component.html',
-  styleUrls: ['./artist-detail.component.css'],
+  styleUrl: './artist-detail.component.css'
 })
 export class ArtistDetailComponent {
-  @Input() artist: { id: number; name: string; specialty: string } | null = null;
-  @Output() artistSelected = new EventEmitter<number>();
+  @Input() artist!: TattooArtist;
+  @Output() selectArtist = new EventEmitter<string>();
 
-  selectArtist(): void {
-    if (this.artist) {
-      this.artistSelected.emit(this.artist.id);
-    }
+  onSelect() {
+    this.selectArtist.emit(this.artist.id);
   }
 }

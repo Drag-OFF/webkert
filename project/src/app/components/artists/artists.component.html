@@ -1,20 +1,10 @@
 <h2>Our Artists</h2>
 <div class="artists-container">
-  <mat-card *ngFor="let artist of artists" class="artist-card">
-    <mat-card-header>
-      <mat-icon mat-card-avatar>person</mat-icon>
-      <mat-card-title>{{ artist.name }}</mat-card-title>
-      <mat-card-subtitle>{{ artist.specialty }}</mat-card-subtitle>
-    </mat-card-header>
-    <mat-card-content>
-      <p>Specialty: {{ artist.specialty }}</p>
-    </mat-card-content>
-    <mat-card-actions>
-      <button mat-raised-button color="primary" (click)="onArtistSelected(artist.id)">
-        Select Artist
-      </button>
-    </mat-card-actions>
-  </mat-card>
+  <app-artist-detail
+    *ngFor="let artist of artists"
+    [artist]="artist"
+    (selectArtist)="onArtistSelected($event)">
+  </app-artist-detail>
 </div>
 <p *ngIf="selectedArtistId" class="selected-artist">
   Selected Artist ID: {{ selectedArtistId }}
