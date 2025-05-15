@@ -1,6 +1,6 @@
 # Üdv!
 
-A projekt futtatása előtt mindén futtasd le a következő parancsot!
+A projekt futtatása előtt mindképp futtasd le a következő parancsot a projektem gyökér könyvtárában!
 
 ```bash
 npm install
@@ -13,7 +13,7 @@ ng serve
 ```
 
 
-Sima felhasználót vna lehetőség magadnak is regisztrálni, admin fiókot viszont nem.
+Sima felhasználót van lehetőség magadnak is regisztrálni, admin fiókot viszont nem.
 Admin fiók adatai:
 
 ```
