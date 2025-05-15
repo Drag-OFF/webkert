@@ -1,12 +1,14 @@
-<nav>
-  <a routerLink="/" routerLinkActive="active" [ngClass]="{ 'highlight': isHighlighted }">Home</a>
-  <a routerLink="/booking" routerLinkActive="active">Booking</a>
-  <a routerLink="/artists" routerLinkActive="active">Artists</a>
-  <a routerLink="/contact" routerLinkActive="active">Contact</a>
-</nav>
-
 <mat-toolbar color="primary">
-  <span>My Tattoo Booking App</span>
+  <span style="flex: 1 1 auto;">
+    <a mat-button routerLink="/">Home</a>
+    <a mat-button routerLink="/artists" *ngIf="isLoggedIn()">Artists</a>
+    <a mat-button routerLink="/booking" *ngIf="isLoggedIn()">Booking</a>
+    <a mat-button routerLink="/contact">Contact</a>
+    <a mat-button routerLink="/profile" *ngIf="isLoggedIn()">Profile</a>
+  </span>
+  <a mat-button routerLink="/register" *ngIf="!isLoggedIn()">Register</a>
+  <a mat-button routerLink="/login" *ngIf="!isLoggedIn()">Login</a>
+  <a mat-button routerLink="/admin" *ngIf="isAdmin">Admin</a>
+  <button mat-button *ngIf="isLoggedIn()" (click)="logout()">Logout</button>
 </mat-toolbar>
-
 <router-outlet></router-outlet>

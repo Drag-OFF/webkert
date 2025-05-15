@@ -10,6 +10,12 @@ import { Appointment } from '../../models/Appointment';
 import { Subscription } from 'rxjs';
 import { MatIconModule } from '@angular/material/icon';
 import { MatListModule } from '@angular/material/list';
+import { MatSelectModule } from '@angular/material/select';
+import { ArtistService } from '../../services/artist.service';
+import { TattooArtist } from '../../models/TattooArtist';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatNativeDateModule } from '@angular/material/core';
+
 
 @Component({
   selector: 'app-booking',
@@ -21,8 +27,11 @@ import { MatListModule } from '@angular/material/list';
     MatFormFieldModule,
     MatInputModule,
     MatButtonModule,
-    MatListModule,   // <-- EZ KELL
-    MatIconModule    // <-- EZ KELL
+    MatListModule,
+    MatIconModule,
+    MatSelectModule,
+    MatDatepickerModule,
+    MatNativeDateModule
   ],
   templateUrl: './booking.component.html',
   styleUrls: ['./booking.component.css']
@@ -30,14 +39,24 @@ import { MatListModule } from '@angular/material/list';
 export class BookingComponent implements OnInit, OnDestroy {
   bookingForm: FormGroup;
   appointments: Appointment[] = [];
+  artists: TattooArtist[] = [];
   private sub?: Subscription;
+  private artistSub?: Subscription;
+  minDate = new Date(); // mai nap
+  maxDate = new Date(2050, 11, 31); // 2050. december 31.
 
-  constructor(private fb: FormBuilder, private bookingService: BookingService) {
+  constructor(
+    private fb: FormBuilder,
+    private bookingService: BookingService,
+    private artistService: ArtistService
+  ) {
     this.bookingForm = this.fb.group({
       name: ['', Validators.required],
       email: ['', [Validators.required, Validators.email]],
+      artistId: ['', Validators.required],
       date: ['', Validators.required],
       description: ['']
+      
     });
   }
 
@@ -45,28 +64,30 @@ export class BookingComponent implements OnInit, OnDestroy {
     this.sub = this.bookingService.getAppointments().subscribe(apps => {
       this.appointments = apps;
     });
-    console.log('BookingComponent initialized');
+    this.artistSub = this.artistService.getArtists().subscribe((artists: TattooArtist[]) => {
+      this.artists = artists;
+    });
   }
 
   ngOnDestroy() {
     this.sub?.unsubscribe();
-    console.log('BookingComponent destroyed');
+    this.artistSub?.unsubscribe();
   }
 
   onSubmit() {
-  if (this.bookingForm.valid) {
-    const newAppointment: Appointment = {
-      id: '', // Firestore generálja az id-t
-      customerId: 'demo',
-      artistId: 'demo',
-      date: this.bookingForm.value.date,
-      time: '10:00',
-      description: this.bookingForm.value.description
-    };
-    this.bookingService.addAppointment(newAppointment).then(() => {
-      this.bookingForm.reset();
-    });
-  }
+    if (this.bookingForm.valid) {
+      const newAppointment: Appointment = {
+        id: '', // Firestore generálja az id-t
+        customerId: 'demo', // vagy a bejelentkezett user id-ja
+        artistId: this.bookingForm.value.artistId,
+        date: this.bookingForm.value.date,
+        time: '10:00',
+        description: this.bookingForm.value.description
+      };
+      this.bookingService.addAppointment(newAppointment).then(() => {
+        this.bookingForm.reset();
+      });
+    }
   }
 
   deleteAppointment(id: string) {

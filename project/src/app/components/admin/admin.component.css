@@ -1,0 +1,29 @@
+.admin-form {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+
+.admin-form mat-form-field {
+  flex: 1 1 250px;
+  min-width: 200px;
+}
+
+.admin-section {
+  margin-top: 1.5rem;
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  flex-wrap: wrap;
+}
+
+.admin-table-section {
+  margin-top: 1.5rem;
+  width: 100%;
+}
+
+.admin-table {
+  width: 100%;
+  margin-top: 1rem;
+}

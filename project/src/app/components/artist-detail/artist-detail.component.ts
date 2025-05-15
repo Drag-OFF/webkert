@@ -1,11 +1,11 @@
-import { Component, Input, Output, EventEmitter } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { Firestore, doc, getDoc } from '@angular/fire/firestore';
 import { MatCardModule } from '@angular/material/card';
-import { MatButtonModule } from '@angular/material/button';
-import { MatIconModule } from '@angular/material/icon';
-import { TattooArtist } from '../../models/TattooArtist';
+import { CommonModule } from '@angular/common';
 import { ArtistNameUpperPipe } from '../../pipes/artist-name-upper.pipe';
 import { SpecialtyListPipe } from '../../pipes/specialty-list.pipe';
+import { TattooArtist } from '../../models/TattooArtist';
 
 @Component({
   selector: 'app-artist-detail',
@@ -13,19 +13,25 @@ import { SpecialtyListPipe } from '../../pipes/specialty-list.pipe';
   imports: [
     CommonModule,
     MatCardModule,
-    MatButtonModule,
-    MatIconModule,
     ArtistNameUpperPipe,
     SpecialtyListPipe
   ],
   templateUrl: './artist-detail.component.html',
-  styleUrl: './artist-detail.component.css'
+  styleUrls: ['./artist-detail.component.css']
 })
-export class ArtistDetailComponent {
-  @Input() artist!: TattooArtist;
-  @Output() selectArtist = new EventEmitter<string>();
+export class ArtistDetailComponent implements OnInit {
+  artist: TattooArtist | null = null;
+  loading = true;
 
-  onSelect() {
-    this.selectArtist.emit(this.artist.id);
+  constructor(private route: ActivatedRoute, private firestore: Firestore) {}
+
+  async ngOnInit() {
+    const id = this.route.snapshot.paramMap.get('id');
+    if (id) {
+      const ref = doc(this.firestore, 'artists', id);
+      const snap = await getDoc(ref);
+      this.artist = snap.exists() ? ({ id, ...snap.data() } as TattooArtist) : null;
+    }
+    this.loading = false;
   }
 }

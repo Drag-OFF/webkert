@@ -1,11 +1,16 @@
-<h2>Our Artists</h2>
 <div class="artists-container">
-  <app-artist-detail
-    *ngFor="let artist of artists"
-    [artist]="artist"
-    (selectArtist)="onArtistSelected($event)">
-  </app-artist-detail>
+  <div class="artist-card" *ngFor="let artist of artists">
+    <div class="artist-card-content">
+      <strong>{{ artist.name }}</strong>
+      <div><b>Specialties:</b> {{ artist.specialties.join(', ') }}</div>
+      <div *ngIf="artist.bio">{{ artist.bio }}</div>
+    </div>
+    <ng-container *ngIf="artist.imageUrl; else noImage">
+      <img [src]="artist.imageUrl" alt="{{ artist.name }}" class="artist-image">
+    </ng-container>
+    <ng-template #noImage>
+      <div class="image-placeholder">No image</div>
+    </ng-template>
+    <button mat-button [routerLink]="['/artist', artist.id]">Select Artist</button>
+  </div>
 </div>
-<p *ngIf="selectedArtistId" class="selected-artist">
-  Selected Artist ID: {{ selectedArtistId }}
-</p>

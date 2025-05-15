@@ -1,15 +1,18 @@
-<mat-card class="artist-card" appBackground>
-  <mat-card-header>
-    <mat-icon mat-card-avatar>person</mat-icon>
+<ng-container *ngIf="!loading && artist; else loadingTpl">
+  <mat-card class="artist-detail-card">
     <mat-card-title>{{ artist.name | artistNameUpper }}</mat-card-title>
-    <mat-card-subtitle>{{ artist.specialties | specialtyList }}</mat-card-subtitle>
-  </mat-card-header>
-  <mat-card-content>
-    <p>Specialties: {{ artist.specialties | specialtyList }}</p>
-  </mat-card-content>
-  <mat-card-actions>
-    <button mat-raised-button color="primary" (click)="onSelect()" appHighlight>
-      Select Artist
-    </button>
-  </mat-card-actions>
-</mat-card>
+    <div class="artist-detail-content">
+      <img *ngIf="artist.imageUrl; else noImage" [src]="artist.imageUrl" alt="{{ artist.name }}" class="artist-detail-image">
+      <ng-template #noImage>
+        <div class="artist-detail-image artist-detail-placeholder">No image</div>
+      </ng-template>
+      <div class="artist-detail-info">
+        <div><strong>Specialties:</strong> {{ artist.specialties | specialtyList }}</div>
+        <div *ngIf="artist.bio" style="margin-top: 1rem;">{{ artist.bio }}</div>
+      </div>
+    </div>
+  </mat-card>
+</ng-container>
+<ng-template #loadingTpl>
+  <mat-card>Loading...</mat-card>
+</ng-template>

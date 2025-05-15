@@ -15,3 +15,38 @@
   font-weight: bold;
   margin-top: 20px;
 }
+
+.artist-card {
+  width: 260px;
+  min-height: 340px;
+  height: 340px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 18px 12px 12px 12px;
+  box-sizing: border-box;
+  border-radius: 14px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.07);
+  background: #fff;
+  transition: box-shadow 0.2s;
+  justify-content: flex-start;
+}
+
+.artist-card img,
+.artist-card .image-placeholder {
+  width: 120px;
+  height: 120px;
+  object-fit: cover;
+  border-radius: 8px;
+  margin: 16px 0 8px 0;
+  background: #f3f3f3;
+  display: block;
+}
+.artist-card .image-placeholder {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #bbb;
+  font-size: 1.2rem;
+  font-style: italic;
+}

@@ -5,12 +5,14 @@ import { provideFirestore, getFirestore } from '@angular/fire/firestore';
 import { environment } from './environments/environment';
 import { provideRouter } from '@angular/router';
 import { routes } from './app/app.routes'; // vagy ahol a route-jaid vannak
+import { provideAuth, getAuth } from '@angular/fire/auth';
 
 bootstrapApplication(AppComponent, {
   providers: [
     provideFirebaseApp(() => initializeApp(environment.firebase)),
     provideFirestore(() => getFirestore()),
-    provideRouter(routes), // <-- EZ KELL!
-    // ...egyéb providerek...
+    
+    provideAuth(() => getAuth()),
+    provideRouter(routes),
   ]
 });
