@@ -1,15 +1,22 @@
 # Üdv!
 
-Szia!
-
-Ha a sima projektet szeretnéd futtatni (ami ugyanaz, mint a `project_noinstall.zip`), akkor az `ng serve` parancs kiadása előtt futtasd a következőt:
+A projekt futtatása előtt mindén futtasd le a következő parancsot!
 
 ```bash
 npm install
 ```
 
+Az install után pedig add ki a következő utasítást!
 
-Ha pedig az installált verziót szeretnéd használni, akkor a project_npminstalled.zip fájlt kell kicsomagolni. Ebben az esetben már csak a következőt kell kiadnod:
 ```bash
 ng serve
+```
+
+
+Sima felhasználót vna lehetőség magadnak is regisztrálni, admin fiókot viszont nem.
+Admin fiók adatai:
+
+```
+email: admin@tattoobooking.hu
+jelszó: adminadmin
 ```
