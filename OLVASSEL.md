@@ -20,3 +20,6 @@ Admin fiók adatai:
 email: admin@tattoobooking.hu
 jelszó: adminadmin
 ```
+
+
+Deployolt link: https://tatoobooking.web.app
