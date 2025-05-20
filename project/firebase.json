@@ -1,10 +1,12 @@
 {
   "hosting": {
-    "public": "src",
+    "public": "dist/project/browser",
     "ignore": [
       "firebase.json",
       "**/.*",
       "**/node_modules/**"
     ]
+    
   }
+  
 }
